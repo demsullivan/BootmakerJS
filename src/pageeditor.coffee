@@ -1,6 +1,8 @@
 
 class BootstrapEditor
-        initialize: () ->
+        constructor: (config) ->
+                @options = config
+                @$el = $(@el)
                 @rows = @$el.find('div['+@options.prefix+'-row]')
                 @cols = @rows.find('div['+@options.prefix+'-col]')
                 @editMode = false
