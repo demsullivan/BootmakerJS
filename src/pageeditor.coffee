@@ -34,24 +34,13 @@ class BootstrapEditor
                                 .html('&times;')
                                 .appendTo(@cols)
                                 .on('click', @onCellDelete)
-                        
-                        newRow = document.createElement('div')
-                        $(newRow).addClass('row-fluid').attr(@options.prefix+'-ghost-row', '')
-                        for x in [1..12]
-                                d = document.createElement('div')
-                                $(d).addClass('span1')
-                                        .addClass(@options.cssPrefix+'-ghost-col')
-                                        .attr(@options.prefix+'-ghost-col', '')
-                                        .html('')
-                                $(newRow).append(d)
-                        @$el.append(newRow)
+
                         @cols.on('dblclick', @onCellDblClick)
 
                 else
                         @editMode = false;
                         @rows.removeClass(@options.cssPrefix+'-row')
                         @cols.removeClass(@options.cssPrefix+'-col')
-                        @$el.find('div['+@options.prefix+'-ghost-row]').remove()
                         @cols.resizable('destroy')
                         @cols.off('dblclick')
 
@@ -66,11 +55,12 @@ class BootstrapEditor
                        movement = 'right'
 
                 wChange = ui.element.data('snapWidth') - ui.size.width
-                x = ui.element.data('snapWidth') / ui.element.bsSpan()
+                
                 # shorthand
                 el = ui.element
                 sibEl = ui.element.data('siblings')[movement]
-                if Math.abs(wChange) > x
+                
+                if Math.abs(wChange) > (ui.element.data('snapWidth') / ui.element.bsSpan())
                         if wChange > 0
                                 if el.bsSpan() > 1
                                         ui.element.bsSpan(ui.element.bsSpan()-1)
@@ -86,3 +76,28 @@ class BootstrapEditor
                 
         onCellOffsetClick: (e) ->
                 console.dir e
+
+
+$.fn.bsSpan = (val=null) ->
+        for cls in $(this[0]).context.classList
+                if cls.indexOf('span') >= 0
+                        if val == null
+                                return new Number(cls.substr(4))
+                        else
+                                $(this[0]).removeClass(cls)
+                                $(this[0]).addClass('span'+val)
+                                return $(this)
+                
+$.fn.bsOffset = (val=null) ->
+        for cls in $(this[0]).context.classList
+                if cls.indexOf('offset') >= 0
+                        if val == null
+                                return new Number(cls.substr(6))
+                        else
+                                $(this[0]).removeClass(cls)
+                                $(this[0]).addClass('offset'+val)
+                                return $(this)
+        if val == null
+                return 0
+        else
+                $(this[0]).addClass('offset'+val)
