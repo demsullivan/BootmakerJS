@@ -15,7 +15,7 @@ class BootstrapEditor
 
                         # add handles
                         @cols.resizable(
-                                helper: 'ui-resizable-helper'
+                                helper: @options.cssPrefix+'-resize-helper'
                                 handles: "e, s, w"
                                 start: (e, ui) ->
                                         ui.element.data(

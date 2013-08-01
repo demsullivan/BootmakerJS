@@ -14,6 +14,43 @@ Start off with a simple file like this:
     <title>Bootstrap Editor Demo</title>
     <link rel="stylesheet" type="text/css" href="/path/to/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="/path/to/jquery-ui.css"/>
+    <style type="text/css">
+      .bse-edit-resize-helper {
+        border: 2px dashed #f00;
+      }
+
+      .bse-edit-handle {
+        display: block;
+	position: absolute;
+      }
+
+      .bse-edit-del-cell {
+        font-size: 14pt;
+	top: -5px;
+	right: 0px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+      }
+
+      .ui-resizable-e {
+        top: 0px;
+	right: 0px;
+	cursor: e-resize;
+	background-color: #c0c0c0;
+	width: 5px;
+	height: 100%;
+      }
+
+      .ui-resizable-w {
+        top: 0px;
+	left: 0px;
+	cursor: e-resize;
+	background-color: #c0c0c0;
+	width: 5px;
+	height: 100%;
+      }
+
   </head>
   <body>
     <div class="container" id="maincontent">
